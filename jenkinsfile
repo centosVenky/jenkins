@@ -19,10 +19,6 @@ echo 'Build sucessfully uploaded'
 }
 }
 
-stage('clean workspace'){
-node{
-cleanWs deleteDirs: true, patterns: [[pattern: '.zip', type: 'INCLUDE']]
-}
-}
+
 
 
