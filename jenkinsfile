@@ -1,8 +1,16 @@
-
-stage('nexus parameters phase')
+stage('welcome to jenkins'){
 node{
-echo 'hello'
-input message: 'Enter GAV Parameters ', parameters: [password(defaultValue: 'pass@123', description: '', name: 'admin')]
+echo 'This stage of pipeline is for entering credentials of nexus 3'
+input message: 'Enter Nexus username and password', parameters: [password(defaultValue: 'pass@123', description: '', name: 'admin')]
+}
+
+}
+stage('nexus GAV parameters phase')
+node{
+input message: 'Enter GAV Parameters', parameters: [string(defaultValue: 'com.zycus', description: '', name: 'Group', trim: false), string(defaultValue: '', description: '', name: 'Artifact', trim: false), string(defaultValue: '', description: '', name: 'Version', trim: false)]
+
+  }
+
 }
 
 
