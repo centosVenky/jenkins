@@ -12,7 +12,11 @@ input message: 'Enter GAV Parameters', parameters: [string(defaultValue: 'com.zy
   }
 
 }
-
+stage('upload the build'){
+node{
+input message: 'Upload the build ', parameters: [file(description: '', name: 'builds.zip')]
+}
+}
 
 
 
