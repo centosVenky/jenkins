@@ -5,7 +5,7 @@ input message: 'Enter Nexus username and password', parameters: [password(defaul
 }
 
 }
-stage('nexus GAV parameters phase')
+stage('nexus GAV parameters phase'){
 node{
 input message: 'Enter GAV Parameters', parameters: [string(defaultValue: 'com.zycus', description: '', name: 'Group', trim: false), string(defaultValue: '', description: '', name: 'Artifact', trim: false), string(defaultValue: '', description: '', name: 'Version', trim: false)]
 
