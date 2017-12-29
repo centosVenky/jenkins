@@ -19,6 +19,10 @@ echo 'Build sucessfully uploaded'
 }
 }
 
-
+stage('clean workspace'){
+node{
+cleanWs(patterns: [[pattern: '.zip', type: 'EXCLUDE']])
+}
+}
 
 
