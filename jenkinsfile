@@ -2,3 +2,16 @@ node{
 echo 'hello'
 
 }
+
+
+
+stage('clean workspace'){
+  node(){
+    cleanWs()
+    echo 'work space cleaned'
+  }
+}
+
+stage('getting pom.xml and settings.xml'){
+  node(){
+  
