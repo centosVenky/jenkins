@@ -1,3 +1,5 @@
+
+stage('nexus parameters phase')
 node{
 echo 'hello'
 input message: 'Enter GAV Parameters ', parameters: [password(defaultValue: 'pass@123', description: '', name: 'admin')]
