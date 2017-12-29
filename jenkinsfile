@@ -12,6 +12,12 @@ stage('clean workspace'){
   }
 }
 
-stage('getting pom.xml and settings.xml'){
+
+
+stage('Get GAV parameters from the user'){
+
   node(){
-  
+  input message: 'Enter GAV Parameters ', parameters: [string(defaultValue: 'com.zycus', description: '', name: 'Group', trim: false), string(defaultValue: '', description: '', name: 'Artificat', trim: false), string(defaultValue: '', description: '', name: 'Version', trim: false), file(description: '', name: 'bulids.zip')]
+  }
+
+}
