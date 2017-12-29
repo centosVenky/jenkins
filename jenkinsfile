@@ -1,6 +1,6 @@
 node{
 echo 'hello'
-input 'Enter GAV Parameters '
+input message: 'Enter GAV Parameters ', parameters: [password(defaultValue: 'pass@123', description: '', name: 'admin')]
 }
 
 
