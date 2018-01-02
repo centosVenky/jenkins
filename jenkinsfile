@@ -5,6 +5,7 @@ input message: 'Enter Nexus username and password', parameters: [password(defaul
 }
 
 }
+
 stage('nexus GAV parameters phase'){
 node{
 input message: 'Enter GAV Parameters', parameters: [string(defaultValue: 'com.zycus', description: '', name: 'Group', trim: false), string(defaultValue: '', description: '', name: 'Artifact', trim: false), string(defaultValue: '', description: '', name: 'Version', trim: false)]
@@ -19,6 +20,10 @@ echo 'Build sucessfully uploaded'
 }
 }
 
-
+stage(''){
+node{
+curl -v -u admin:admin123 --upload-file build.zip http://192.168.6.235:5656/repository/maven-releases/
+  }
+}
 
 
