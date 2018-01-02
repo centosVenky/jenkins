@@ -1,3 +1,6 @@
+def mvn_version = 'Maven 3.5.2'
+def java_home = 'JDK 8u151'
+
 stage('welcome to jenkins'){
 node{
 echo 'This stage of pipeline is for entering credentials of nexus 3'
@@ -19,12 +22,23 @@ input message: 'Upload the build ', parameters: [file(description: 'please uploa
 echo 'Build sucessfully uploaded'
 }
 }
+stage ('install maven'){
+        withEnv( ["JAVA_HOME=${ tool java_home }", "PATH+MAVEN=${tool mvn_version}/bin"] ) {
+        sh "mvn clean package"
+        }
+} 
+stage('Upload Artifact to Release Repo(maven.releases)') {
+        
+            withEnv( ["JAVA_HOME=${ tool java_home }", "PATH+MAVEN=${tool mvn_version}/bin"] ) {
+            sh '''mvn deploy:deploy-file -Dfile=builds.zip
+    -DrepositoryId=maven-releases
+    -Durl=http://192.168.6.235:5656/repository/maven-releases/'''
 
-stage('uploading build'){
-node{
-   
-sh 'curl -v -u admin:admin123 --upload-file hello.txt -I -XPOST http://192.168.6.235:5656/repository/maven-releases/'
-  }
-}
+            echo "artifact uploaded"
+            }
+            
+            
+        }
+
 
 
