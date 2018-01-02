@@ -22,10 +22,9 @@ input message: 'Upload the build ', parameters: [file(description: 'please uploa
 echo 'Build sucessfully uploaded'
 }
 }
-node{
 
-} 
 stage('Upload Artifact to Release Repo(maven.releases)') {
+node{
         
             withEnv( ["JAVA_HOME=${ tool java_home }", "PATH+MAVEN=${tool mvn_version}/bin"] ) {
             sh '''mvn deploy:deploy-file -Dfile=builds.zip
@@ -37,6 +36,6 @@ stage('Upload Artifact to Release Repo(maven.releases)') {
             
             
         }
-
+  }
 }
 
