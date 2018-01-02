@@ -22,7 +22,8 @@ echo 'Build sucessfully uploaded'
 
 stage('uploading build'){
 node{
-sh 'curl -v -u admin:admin123 --upload-file build.zip http://192.168.6.235:5656/repository/maven-releases/'
+   
+sh 'curl -v -u admin:admin123 --upload-file build.zip -I -XPOST http://192.168.6.235:5656/repository/maven-releases/'
   }
 }
 
