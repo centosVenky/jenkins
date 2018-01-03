@@ -26,13 +26,11 @@ echo 'Build sucessfully uploaded'
 stage('Upload Artifact to Release Repo(maven.releases)') {
 node{
         
-            withEnv( ["JAVA_HOME=${ tool java_home }", "PATH+MAVEN=${tool mvn_version}/bin"] ) {
-            sh '''mvn deploy:deploy-file -Dfile=builds.zip
-    -DrepositoryId=maven-releases
-    -Durl=http://192.168.6.235:5656/repository/maven-releases/'''
+            sh '''mvn -X deploy:deploy-file -DgroupId=ERT -DartifactId=ert -Dversion=1.0.0 -DgeneratePom=false -Dpackaging=zip -DrepositoryId=nexus -Durl=http://192.168.6.235:5656/repository/maven-releases/ -DpomFile=pom.xml -Dfile=builds.zip
+'''
 
             echo "artifact uploaded"
-            }
+            
             
             
         }
