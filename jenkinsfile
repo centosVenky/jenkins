@@ -26,6 +26,7 @@ stage('upload the build'){
 node{
 input message: 'Upload the build ', parameters: [file(description: 'please upload the build file as zip and naming convention of the file should be builds.zip', name: 'builds.zip')]
 pwd()
+sh 'pwd'
 echo 'Build sucessfully uploaded'
 }
 }
