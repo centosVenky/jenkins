@@ -8,6 +8,12 @@ input message: 'Enter Nexus username and password', parameters: [password(defaul
 }
 
 }
+stage ('clean workspace') {
+        node {
+            cleanWs()
+            echo "workspace cleared"
+        }
+    }
 
 stage('nexus GAV parameters phase'){
 node{
@@ -43,6 +49,12 @@ node{
         }
   
 }
+stage ('clean workspace') {
+        node {
+            cleanWs()
+            echo "workspace cleared"
+        }
+    }
 
 
 
