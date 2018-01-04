@@ -25,8 +25,8 @@ input message: 'Enter GAV Parameters', parameters: [string(defaultValue: 'com.zy
 stage('upload the build'){
 node{
 input message: 'Upload the build ', parameters: [file(description: 'please upload the build file as zip and naming convention of the file should be builds.zip', name: 'builds.zip')]
-pwd()
-sh 'pwd'
+fileExists '/var/lib/jenkins/workspace/nexus/builds.zip'
+sh 'll'
 echo 'Build sucessfully uploaded'
 }
 }
