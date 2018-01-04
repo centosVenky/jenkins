@@ -23,5 +23,26 @@ echo 'Build sucessfully uploaded'
 }
 }
 
+stage('getting pom.xml from git'){
+node{
+checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'e1dd18b6-5c8f-406e-8b8b-ae52fefe96e5', url: 'https://github.com/cetosVenky/jenkins.git']]])
+}
+}
+
+stage('Upload Artifact to Release Repo(maven.releases)') {
+node{
+        
+           withEnv( ["JAVA_HOME=${ tool java_home }", "PATH+MAVEN=${tool mvn_version}/bin"] ){
+             sh '''mvn -X deploy:deploy-file -DgroupId=ERT -DartifactId=ert -Dversion=1.0.0 -DgeneratePom=false -Dpackaging=zip -DrepositoryId=nexus -Durl=http://192.168.6.235:5656/repository/maven-releases/ -DpomFile=pom.xml -Dfile=builds.zip
+'''
+            }
+            echo "artifact uploaded"
+            
+            
+            
+        }
+  
+}
+
 
 
