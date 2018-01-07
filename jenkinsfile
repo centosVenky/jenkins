@@ -28,6 +28,7 @@ input message: 'Upload the build ', parameters: [file(description: 'please uploa
 
 sh 'pwd'
 sh 'cp /var/lib/jenkins/jobs/nexus/lastSuccessful/builds.zip .'
+sh 'pwd'
 sh 'ls -l'
 
 fileExists '/var/lib/jenkins/workspace/nexus/builds.zip'
