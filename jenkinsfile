@@ -42,11 +42,7 @@ node{
 checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'e1dd18b6-5c8f-406e-8b8b-ae52fefe96e5', url: 'https://github.com/cetosVenky/jenkins.git']]])
 }
 }
-stage('wait'){
-node{
-input message: 'wait', parameters: [choice(choices: ['true', 'false'], description: '', name: 'wait')]
-}
-}
+
 stage('Upload Artifact to Release Repo(maven.releases)') {
 node{
         
