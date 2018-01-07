@@ -27,6 +27,7 @@ node{
 input message: 'Upload the build ', parameters: [file(description: 'please upload the build file as zip and naming convention of the file should be builds.zip', name: 'builds.zip')]
 fileExists '/var/lib/jenkins/workspace/nexus/builds.zip'
 sh 'pwd'
+sh 'cp /var/lib/jenkins/jobs/nexus/builds/lastSuccessfulBuild/builds.zip .'
 sh 'ls -l'
 echo 'Build sucessfully uploaded'
 }
