@@ -15,25 +15,27 @@ stage ('clean workspace') {
         }
     }
 
-stage('nexus GAV parameters phase'){
-node{
-input message: 'Enter GAV Parameters', parameters: [string(defaultValue: 'com.zycus', description: '', name: 'Group', trim: false), string(defaultValue: '', description: '', name: 'Artifact', trim: false), string(defaultValue: '', description: '', name: 'Version', trim: false)]
 
-  }
-
-}
 stage('upload the build'){
 node{
 input message: 'Upload the build ', parameters: [file(description: 'please upload the build file as zip and naming convention of the file should be builds.zip', name: 'builds.zip')]
 
 sh 'pwd'
-sh 'cp /var/lib/jenkins/jobs/nexus/lastSuccessful/builds.zip .'
+sh 'cp /var/lib/jenkins/jobs/nexus/lastSuccessful/builds.zip /var/lib/jenkins/workspace/nexus/.'
 sh 'pwd'
 sh 'ls -l'
 
 fileExists '/var/lib/jenkins/workspace/nexus/builds.zip'
 echo 'Build sucessfully uploaded'
 }
+}
+
+stage('nexus GAV parameters phase'){
+node{
+input message: 'Enter GAV Parameters', parameters: [string(defaultValue: 'com.zycus', description: '', name: 'Group', trim: false), string(defaultValue: '', description: '', name: 'Artifact', trim: false), string(defaultValue: '', description: '', name: 'Version', trim: false)]
+
+  }
+
 }
 
 stage('getting pom.xml from git'){
