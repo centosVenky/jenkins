@@ -16,19 +16,7 @@ stage ('clean workspace') {
     }
 
 
-stage('upload the build'){
-node{
-input message: 'Upload the build ', parameters: [file(description: 'please upload the build file as zip and naming convention of the file should be builds.zip', name: 'builds.zip')]
 
-sh 'pwd'
-sh 'cp /var/lib/jenkins/jobs/nexus/lastSuccessful/builds.zip /var/lib/jenkins/workspace/nexus/.'
-sh 'pwd'
-sh 'ls -l'
-
-fileExists '/var/lib/jenkins/workspace/nexus/builds.zip'
-echo 'Build sucessfully uploaded'
-}
-}
 
 stage('nexus GAV parameters phase'){
 node{
@@ -43,7 +31,19 @@ node{
 checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'e1dd18b6-5c8f-406e-8b8b-ae52fefe96e5', url: 'https://github.com/cetosVenky/jenkins.git']]])
 }
 }
+stage('upload the build'){
+node{
+input message: 'Upload the build ', parameters: [file(description: 'please upload the build file as zip and naming convention of the file should be builds.zip', name: 'builds.zip')]
 
+sh 'pwd'
+sh 'cp /var/lib/jenkins/jobs/nexus/lastSuccessful/builds.zip /var/lib/jenkins/workspace/nexus/.'
+sh 'pwd'
+sh 'ls -l'
+
+fileExists '/var/lib/jenkins/workspace/nexus/builds.zip'
+echo 'Build sucessfully uploaded'
+}
+}
 stage('Upload Artifact to Release Repo(maven.releases)') {
 node{
         
